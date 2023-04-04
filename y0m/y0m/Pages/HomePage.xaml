@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:androidSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             x:Class="y0m.Pages.HomePage"
+             Title="Home">
+    <StackLayout>
+        <ListView x:Name="VideoList" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <WebView Grid.Row="0" Source="{Binding EmbedUrl}" HeightRequest="200" WidthRequest="300" />
+                            <Label Grid.Row="1" Text="{Binding Title}" FontSize="Small" />
+                            <StackLayout Grid.Row="2" Orientation="Horizontal" Spacing="5">
+                                <Button Text="Liste+" BackgroundColor="#507DBC" FontSize="12" HeightRequest="40" Clicked="OnAddToListButtonTapped" CommandParameter="{Binding .}" Padding="0" />
+                                <Button Text="Download" BackgroundColor="#507DBC" FontSize="12" HeightRequest="40" Clicked="OnDownloadButtonTapped" CommandParameter="{Binding .}" Padding="0" />
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

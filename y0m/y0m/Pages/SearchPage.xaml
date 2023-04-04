@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="y0m.Pages.SearchPage"
+             Title="Ara">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0" Orientation="Horizontal" Padding="10" Spacing="5">
+            <Entry x:Name="searchEntry" Placeholder="Video ara..." HorizontalOptions="FillAndExpand" />
+            <Button Text="Ara" TextColor="White" BackgroundColor="#507DBC" Clicked="OnSearchButtonClicked" />
+        </StackLayout>
+
+        <ListView Grid.Row="1" x:Name="searchResultsListView" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <WebView Grid.Row="0" Source="{Binding EmbedUrl}" HeightRequest="200" WidthRequest="300" />
+                            <Label Grid.Row="1" Text="{Binding Title}" FontSize="Small" />
+                            <StackLayout Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Spacing="5">
+                                <Button Text="Liste+" BackgroundColor="#507DBC" FontSize="12" HeightRequest="40" Clicked="OnDownloadButtonTapped" CommandParameter="{Binding .}" Padding="0" />
+                                <Button Text="Download" BackgroundColor="#507DBC" FontSize="12" HeightRequest="40" Clicked="OnAddToListButtonTapped" CommandParameter="{Binding .}" Padding="0" />
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>
