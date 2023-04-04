@@ -3,12 +3,7 @@ using System.Threading.Tasks;
 using y0m.Models;
 using Newtonsoft.Json.Linq;
 using System.IO;
-using YoutubeExplode.Common;
-using YoutubeExplode;
-using Xabe.FFmpeg;
-using Xabe.FFmpeg.Downloader;
-using YoutubeExplode.Converter;
-using YoutubeExplode.Videos.Streams;
+
 using System;
 
 namespace y0m.Services
@@ -65,25 +60,7 @@ namespace y0m.Services
 
         public async Task DownloadVideoAsMp3Async(string videoId, string outputFileName)
         {
-            var youtube = new YoutubeClient();
-            var streamManifest = await youtube.Videos.Streams.GetManifestAsync(videoId);
-            var audioStreamInfo = streamManifest.GetAudioOnlyStreams().GetWithHighestBitrate();
 
-            if (audioStreamInfo != null)
-            {
-                var tempFilePath = Path.GetTempFileName();
-
-                await youtube.Videos.Streams.DownloadAsync(audioStreamInfo, tempFilePath);
-
-                string downloadsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads\y0m";
-                Directory.CreateDirectory(downloadsFolderPath);
-                string outputPath = Path.Combine(downloadsFolderPath, outputFileName);
-
-                var ffmpeg = new FFmpegExecuter();
-
-                await ffmpeg.ConvertAsync(tempFilePath, outputPath, OutputFormat.Mp3);
-                File.Delete(tempFilePath);
-            }
         }
     }
 }
